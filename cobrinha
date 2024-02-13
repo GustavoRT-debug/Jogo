@@ -1,122 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game</title>
-    <style>
-        .snake-game {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 400px;
-            height: 400px;
-            border: 2px solid #000;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .snake {
-            position: absolute;
-            background-color: green;
-        }
-
-        .food {
-            position: absolute;
-            background-color: red;
-        }
-    </style>
-</head>
-<body>
-    <div class="snake-game" id="snakeGame">
-        <div class="snake" id="snake"></div>
-        <div class="food" id="food"></div>
+<div align="center">
+<h2> Seja, bem vindo!</h2>
+</div>
+</br>
+<div align="center">
+  <div align="center">
+  <a href="https://github.com/formandodev">
+    <img height="180em" src="https://github-readme-stats.vercel.app/api?username=formandodev&show_icons=true&theme=dark&include_all_commits=true&count_private=true"/>
     </div>
+</br>
+  <div align="center">
+    <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=formandodev&layout=compact&langs_count=7&theme=dark"/>
+</div>
+</div>
+</br>
+ <div align="center">
+<div style="display: inline_block"><br>
+  <img align="center" alt="Formando-Js" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
+  <img align="center" alt="Formando-React" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg">
+  <img align="center" alt="Formando -HTML" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">
+  <img align="center" alt="Formando-CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
+</div>
+ </div>
+</br>
 
-    <script>
-        const snakeGame = document.getElementById("snakeGame");
-        const snakeElement = document.getElementById("snake");
-        const foodElement = document.getElementById("food");
+ <div align="center">
+  <a href="https://www.youtube.com/c/formandodev/playlists" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" target="_blank"></a>
+  <a href="https://www.instagram.com/formandodev" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a> 
+  <a href = "mailto:formandodev@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+  <a href="Link linkedin" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
+</div>
+</br>
+<p align="center">   <img alingn="center" src="https://profile-counter.glitch.me/Formandodev/count.svg" /></p>
 
-        const boxSize = 20;
-        const gameSize = 20;
 
-        let snake = [{ x: 10, y: 10 }];
-        let food = { x: Math.floor(Math.random() * gameSize), y: Math.floor(Math.random() * gameSize) };
-        let dx = 0;
-        let dy = 0;
-
-        function update() {
-            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-            snake.unshift(head);
-
-            if (head.x === food.x && head.y === food.y) {
-                food.x = Math.floor(Math.random() * gameSize);
-                food.y = Math.floor(Math.random() * gameSize);
-            } else {
-                snake.pop();
-            }
-
-            if (head.x < 0 || head.x >= gameSize || head.y < 0 || head.y >= gameSize || collision()) {
-                alert("Game Over!");
-                restartGame();
-            }
-
-            draw();
-        }
-
-        function draw() {
-            snakeElement.innerHTML = "";
-            snake.forEach(segment => {
-                const snakeSegment = document.createElement("div");
-                snakeSegment.style.width = `${boxSize}px`;
-                snakeSegment.style.height = `${boxSize}px`;
-                snakeSegment.style.backgroundColor = "green";
-                snakeSegment.style.position = "absolute";
-                snakeSegment.style.left = `${segment.x * boxSize}px`;
-                snakeSegment.style.top = `${segment.y * boxSize}px`;
-                snakeElement.appendChild(snakeSegment);
-            });
-
-            foodElement.style.width = `${boxSize}px`;
-            foodElement.style.height = `${boxSize}px`;
-            foodElement.style.backgroundColor = "red";
-            foodElement.style.position = "absolute";
-            foodElement.style.left = `${food.x * boxSize}px`;
-            foodElement.style.top = `${food.y * boxSize}px`;
-        }
-
-        function collision() {
-            return snake.slice(1).some(segment => {
-                return segment.x === snake[0].x && segment.y === snake[0].y;
-            });
-        }
-
-        function restartGame() {
-            snake = [{ x: 10, y: 10 }];
-            dx = 0;
-            dy = 0;
-            food = { x: Math.floor(Math.random() * gameSize), y: Math.floor(Math.random() * gameSize) };
-            draw();
-        }
-
-        document.addEventListener("keydown", event => {
-            if (event.key === "ArrowUp" && dy !== 1) {
-                dx = 0;
-                dy = -1;
-            } else if (event.key === "ArrowDown" && dy !== -1) {
-                dx = 0;
-                dy = 1;
-            } else if (event.key === "ArrowLeft" && dx !== 1) {
-                dx = -1;
-                dy = 0;
-            } else if (event.key === "ArrowRight" && dx !== -1) {
-                dx = 1;
-                dy = 0;
-            }
-        });
-
-        setInterval(update, 100);
-    </script>
-</body>
-</html>
+![snake gif](https://github.com/GustavoRT-debug/GustavoRT-debug/blob/output/github-contribution-grid-snake.svg)
